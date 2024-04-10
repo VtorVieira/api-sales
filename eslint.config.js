@@ -1,6 +1,6 @@
 module.exports = [
   {
-    files: ["**/*.ts"],
-    ignores: ["node_modules/", "dist/", "build", "/*.js"],
-  },
+    files: ['**/*.ts'],
+    ignores: ['node_modules/', 'dist/', 'build', '/*.js']
+  }
 ];

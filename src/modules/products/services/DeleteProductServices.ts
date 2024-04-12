@@ -1,9 +1,11 @@
 import AppError from '@shared/errors/AppError';
 import { ProductRepository } from '../typeorm/repositories/ProductRepository';
+import { getCustomRepository } from 'typeorm';
 
 export default class DeleteProductService {
   public async execute(id: string): Promise<void> {
-    const product = await ProductRepository.findOne({
+    const productsRepository = getCustomRepository(ProductRepository);
+    const product = await productsRepository.findOne({
       where: {
         id
       }
@@ -13,6 +15,6 @@ export default class DeleteProductService {
       throw new AppError('Product not found');
     }
 
-    await ProductRepository.remove(product);
+    await productsRepository.remove(product);
   }
 }

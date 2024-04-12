@@ -1,8 +1,15 @@
+import { EntityRepository, Repository } from 'typeorm';
 import { Product } from '../entities/Product';
-import { AppDataSource } from '@shared/typeorm/data-source';
 
-export const ProductRepository = AppDataSource.getRepository(Product).extend({
-  findByName(name: string): Promise<Product | null> {
-    return this.findOne({ where: { name } });
+@EntityRepository(Product)
+export class ProductRepository extends Repository<Product> {
+  public async findByName(name: string): Promise<Product | undefined> {
+    const product = await this.findOne({
+      where: {
+        name
+      }
+    });
+
+    return product;
   }
-});
+}

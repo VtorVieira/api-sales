@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
-import { ProductRepository } from '../typeorm/repositories/ProductRepository';
 import { getCustomRepository } from 'typeorm';
+import ProductRepository from '../typeorm/repositories/ProductRepository';
 
 export default class DeleteProductService {
   public async execute(id: string): Promise<void> {

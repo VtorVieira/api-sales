@@ -4,6 +4,7 @@ import AppError from '@shared/errors/AppError';
 import UserRespository from '../typeorm/repositories/UsersRespository';
 import User from '../typeorm/entities/User';
 import { sign } from 'jsonwebtoken';
+import auth from '@config/auth';
 
 interface IRequest {
   email: string;
@@ -30,9 +31,9 @@ export default class CreateSessionService {
       throw new AppError('Email or Passwor invalid.', 401);
     }
 
-    const token = sign({}, '5393b611eb971108e2a6e470ca1679f7', {
+    const token = sign({}, auth.jwt.secret, {
       subject: user.id,
-      expiresIn: '1d'
+      expiresIn: auth.jwt.expiresIn
     });
 
     return { user, token };

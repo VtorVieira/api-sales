@@ -36,8 +36,6 @@ export default class ResetPasswordService {
 
     user.password = await hash(password, 8);
 
-    await userTokenRepository.generate(user.id);
-
-    console.log('Token');
+    await usersRepository.save(user);
   }
 }

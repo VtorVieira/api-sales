@@ -12,16 +12,16 @@ interface IProduct {
 }
 
 interface IRequest {
-  customer: Customer;
+  customer_id: string;
   products: IProduct[];
 }
 export default class CreateOrderService {
-  public async execute({ customer, products }: IRequest): Promise<Order> {
+  public async execute({ customer_id, products }: IRequest): Promise<Order> {
     const ordersRepository = getCustomRepository(OrdersRepository);
     const customersRepository = getCustomRepository(CustomersRespository);
     const productsRepository = getCustomRepository(ProductRepository);
 
-    const customerExists = await customersRepository.findById(customer.id);
+    const customerExists = await customersRepository.findById(customer_id);
 
     if (!customerExists) {
       throw new AppError('Could not find any customer with this id.');
